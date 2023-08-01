@@ -1,0 +1,83 @@
+\usepackage[utf8]{inputenc}
+\usepackage[font=footnotesize]{caption}
+\usepackage{hyperref}
+\usepackage[absolute,overlay]{textpos}
+
+\usefonttheme[onlymath]{serif}
+
+\definecolor{primarypurple}{RGB}{78, 42, 132}
+\definecolor{secondarypurple}{RGB}{118, 093, 160}
+\definecolor{tertiarypurple}{RGB}{182, 172, 209}
+\definecolor{grey}{RGB}{137, 141, 141}
+\definecolor{lightgray}{RGB}{120, 120, 120}
+
+\useinnertheme{circles}
+% \useoutertheme[right]{sidebar}
+% \usecolortheme{sidebartab}
+\usecolortheme[named=primarypurple]{structure}
+
+\setbeamercolor{title}{bg=primarypurple, fg=white}
+\setbeamercolor{author in head/foot}{bg=grey, fg=white}
+% \setbeamercolor{sidebar right}{bg=tertiarypurple, fg=white}
+% \setbeamercolor{title in sidebar}{fg=white}
+% \setbeamercolor{author in sidebar}{fg=white}
+% \setbeamercolor{section in sidebar shaded}{fg=lightgray}
+% \setbeamercolor{section in sidebar}{fg=white,bg=secondarypurple}
+% \setbeamercolor{subsection in sidebar shaded}{fg=lightgray}
+% \setbeamercolor{subsection in sidebar}{fg=white,bg=secondarypurple}
+\setbeamercolor{navigation symbols dimmed}{fg=white}
+\setbeamercolor{framesource}{fg=gray}
+\setbeamerfont{framesource}{size=\tiny}
+
+\setbeamertemplate{navigation symbols}{}
+\makeatletter
+\setbeamertemplate{footline}{%
+    \leavevmode%
+    \hbox{%
+        \begin{beamercolorbox}[wd=0.6\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+            \usebeamerfont{title in head/foot}%
+            \insertshortauthor ~ -- ~\insertshorttitle
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=0.3\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+            \usebeamerfont{title in head/foot}%
+            \vspace{-1.5pt}
+            \insertslidenavigationsymbol%
+            \insertframenavigationsymbol%
+            \insertsubsectionnavigationsymbol%
+            \insertsectionnavigationsymbol%
+            \insertdocnavigationsymbol%
+            \insertbackfindforwardnavigationsymbol%
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=0.1\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+            \usebeamerfont{title in head/foot}%\insertframenumber/\inserttotalframenumber
+        \end{beamercolorbox}%
+    }
+}
+\makeatother
+
+% University logo and wordmark
+% \logo{\includegraphics[scale=0.05]{NUacademicN.jpeg}}
+% \titlegraphic{\includegraphics[height=0.8cm]{NUwordmark.png}}
+\titlegraphic{\includegraphics[height=0.5cm]{NUEwordmark.png}}
+
+% Section title page
+\AtBeginSection[]{
+    \begin{frame}
+        \centering
+        \begin{beamercolorbox}[sep=16pt,center]{title}
+            \usebeamerfont{title}\insertsectionhead\par%
+        \end{beamercolorbox}
+    \end{frame}
+}
+
+% Superscript removal for hyperref recognition in pdf string
+\newcommand{\supersc}[1]{\texorpdfstring{\textsuperscript{#1}}{}}
+
+% Citation box
+\setlength{\TPHorizModule}{\paperwidth}
+\setlength{\TPVertModule}{\paperheight}
+\newcommand{\source}[1]{\begin{textblock*}{7cm}(8.7cm,8.15cm)
+    \begin{beamercolorbox}[ht=0.5cm,right]{framesource}
+        \usebeamerfont{framesource}\usebeamercolor[fg]{framesource} Source: {#1}
+    \end{beamercolorbox}
+\end{textblock*}}
