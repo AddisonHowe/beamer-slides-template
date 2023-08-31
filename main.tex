@@ -1,89 +1,30 @@
 \documentclass[aspectratio=169,xcolor=svgnames]{beamer} 
-\input{preambles}
+\usepackage{beamerpreamble}
 
-\setbeameroption{hide notes}
-% \setbeameroption{show notes on second screen=right}
-% \setbeamertemplate{note page}[plain]
-% \addtobeamertemplate{note page}{}{\thispdfpagelabel{notes:\insertframenumber}}
+%--------------------------------------------------------------
+%  document information
 
-
-\usepackage[backend=biber,style=vancouver]{biblatex}
-\addbibresource{references.bib}
-% Bib formatting
-\renewcommand\bibfont{\scriptsize}
-\setbeamertemplate{frametitle continuation}[from second]
-% Now get rid of all the colours
-\setbeamercolor*{bibliography entry title}{fg=black}
-\setbeamercolor*{bibliography entry author}{fg=black}
-\setbeamercolor*{bibliography entry location}{fg=black}
-\setbeamercolor*{bibliography entry note}{fg=black}
-\setbeamertemplate{bibliography entry title}{}
-\setbeamertemplate{bibliography entry location}{}
-\setbeamertemplate{bibliography entry note}{}
-% Suppress the icon
-% \setbeamertemplate{bibliography item}{}
-
-\usepackage{graphicx}
-\graphicspath{{images/}}
-
-\usepackage{amsfonts}
-
-% \usepackage[absolute,overlay]{textpos}
-% \setlength{\TPHorizModule}{\paperwidth}
-% \setlength{\TPVertModule}{\paperheight}
-% \setbeamercolor{framesource}{fg=gray}
-% \setbeamerfont{framesource}{size=\tiny}
-% \newcommand{\source}[1]{\begin{textblock*}{7cm}(8.7cm,8.2cm)
-%     \begin{beamercolorbox}[ht=0.5cm,right]{framesource}
-%         \usebeamerfont{framesource}\usebeamercolor[fg]{framesource} Source: {#1}
-%     \end{beamercolorbox}
-% \end{textblock*}}
-
-% DOCUMENT INFORMATION
-\title[short-title]{Long-Title}
+\title[shorttitle]{LongTitle}
 \subtitle{}
-\author[Addison Howe]{
-	Addison Howe
-}
-
-\date{\today}
+\author[Howe]{Addison Howe}
+\date{}
 
 \begin{document}
+\inserttitleframe{}
+\inserttableofcontents{}
 
-% TITLE PAGE WITHOUT SIDEBAR
-\begingroup
-\makeatletter
-% \setlength{\hoffset}{.5\beamer@sidebarwidth}
-\makeatother
-\begin{frame}[plain]
-\maketitle
-\end{frame}
-\endgroup
-
-% TABLE OF CONTENTS
-\begin{frame}
-\frametitle{Table of Contents}
-\tableofcontents
-\end{frame}
-
-%~~~~~~~~~~~~~~~~~~~~~~~~~%
-%  Section: Introduction  %
-%~~~~~~~~~~~~~~~~~~~~~~~~~%
+%--------------------------------------------------------------
+%  main body
 
 \section{First-Section}
 
 \begin{frame}{Section1}
-    
+    Include citations to \cite{placeholder-ref1} and \cite{placeholder-ref2}.
 \end{frame}
 
-%~~~~~~~~~~~~~~~~~%
-%  Post Material  %
-%~~~~~~~~~~~~~~~~~%
 
-\section*{}
-% REFERENCES
-\begin{frame}[t, allowframebreaks]\frametitle{References}
-    \printbibliography
-\end{frame}
+%--------------------------------------------------------------
+%  post matter
 
+\insertreferences{}
 \end{document}

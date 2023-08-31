@@ -1,0 +1,158 @@
+%----------------------------------------------------------------------
+% standard heading
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerpreamble}[2023/08/31 Addison Howe]
+% \RequirePackage[]{}
+
+%--------------------------------------------------------------
+% packages
+
+\usepackage[utf8]{inputenc}
+\usepackage[font=footnotesize]{caption}
+\usepackage{hyperref}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage{environ}
+\usepackage{booktabs}
+\usepackage{lmodern}
+\usepackage{tikz}
+\usepackage[backend=biber,style=vancouver]{biblatex}
+\usepackage{graphicx}
+
+%----------------------------------------------------------------------
+% input local configurations
+
+\InputIfFileExists{config.cfg}{}{}
+
+%----------------------------------------------------------------------
+% options
+
+%----------------------------------------------------------------------
+% beamer options
+
+\definecolor{primarypurple}{RGB}{78, 42, 132}
+\definecolor{secondarypurple}{RGB}{118, 093, 160}
+\definecolor{tertiarypurple}{RGB}{182, 172, 209}
+\definecolor{grey}{RGB}{137, 141, 141}
+\definecolor{lightgray}{RGB}{120, 120, 120}
+
+\usecolortheme[named=primarypurple]{structure}
+\useinnertheme{circles}
+\usefonttheme[onlymath]{serif}
+
+\setbeamercolor{title}{bg=primarypurple, fg=white}
+\setbeamercolor{author in head/foot}{bg=grey, fg=white}
+\setbeamercolor{navigation symbols dimmed}{fg=white}
+\setbeamercolor{framesource}{fg=gray}
+\setbeamerfont{framesource}{size=\tiny}
+
+%----------------------------------------------------------------------
+% logo and wordmark
+
+% \logo{\includegraphics[scale=0.05]{.misc/NUacademicN.jpeg}}
+% \titlegraphic{\includegraphics[height=0.8cm]{.misc/NUwordmark.png}}
+\titlegraphic{\includegraphics[height=0.5cm]{.misc/NUEwordmark.png}}
+
+%----------------------------------------------------------------------
+% title frame
+
+\newcommand*{\inserttitleframe}{%
+    \begingroup
+        \begin{frame}[plain, noframenumbering]
+            \maketitle
+        \end{frame}
+    \endgroup
+}
+
+%----------------------------------------------------------------------
+% table of contents
+
+\newcommand*{\inserttableofcontents}{%
+    \begin{frame}[plain, noframenumbering]\frametitle{Table of Contents}
+        \tableofcontents
+    \end{frame}
+}
+
+%----------------------------------------------------------------------
+% references slides
+
+\newcommand*{\insertreferences}{%
+    \section*{}
+    \begin{frame}[t, allowframebreaks, noframenumbering]\frametitle{References}
+        \printbibliography
+    \end{frame}
+}
+
+%----------------------------------------------------------------------
+% custom navigation footer
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{%
+    \leavevmode%
+    \hbox{%
+        \begin{beamercolorbox}[wd=0.6\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+            \usebeamerfont{title in head/foot}%
+            \insertshortauthor ~ -- ~\insertshorttitle
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=0.3\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+            \usebeamerfont{title in head/foot}%
+            \vspace{-1.5pt}
+            \insertslidenavigationsymbol%
+            \insertframenavigationsymbol%
+            \insertsubsectionnavigationsymbol%
+            \insertsectionnavigationsymbol%
+            \insertdocnavigationsymbol%
+            \insertbackfindforwardnavigationsymbol%
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=0.1\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+            \usebeamerfont{title in head/foot} \insertframenumber/\inserttotalframenumber
+        \end{beamercolorbox}%
+    }
+}
+
+%----------------------------------------------------------------------
+% section title page
+
+\AtBeginSection[]{
+    \begin{frame}
+        \centering
+        \begin{beamercolorbox}[sep=16pt,center]{title}
+            \usebeamerfont{title}\insertsectionhead\par%
+        \end{beamercolorbox}
+    \end{frame}
+}
+
+% Superscript removal for hyperref recognition in pdf string
+\newcommand{\supersc}[1]{\texorpdfstring{\textsuperscript{#1}}{}}
+
+%----------------------------------------------------------------------
+% source citation box
+
+\setlength{\TPHorizModule}{\paperwidth}
+\setlength{\TPVertModule}{\paperheight}
+\newcommand{\source}[1]{\begin{textblock*}{7cm}(8.7cm,8.15cm)
+    \begin{beamercolorbox}[ht=0.5cm,right]{framesource}
+        \usebeamerfont{framesource}\usebeamercolor[fg]{framesource} Source: {#1}
+    \end{beamercolorbox}
+\end{textblock*}}
+
+%----------------------------------------------------------------------
+% bibliography formatting
+
+\renewcommand\bibfont{\scriptsize}
+\setbeamertemplate{frametitle continuation}[from second]
+% get rid of colors
+\setbeamercolor*{bibliography entry title}{fg=black}
+\setbeamercolor*{bibliography entry author}{fg=black}
+\setbeamercolor*{bibliography entry location}{fg=black}
+\setbeamercolor*{bibliography entry note}{fg=black}
+\setbeamertemplate{bibliography entry title}{}
+\setbeamertemplate{bibliography entry location}{}
+\setbeamertemplate{bibliography entry note}{}
+
+%----------------------------------------------------------------------
