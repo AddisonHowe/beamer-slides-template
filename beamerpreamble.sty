@@ -30,7 +30,33 @@
 \InputIfFileExists{config.tex.cfg}{}{}
 
 %----------------------------------------------------------------------
-% options
+% custom options
+
+% Use subsections option
+\newtoggle{usesubsections}
+\togglefalse{usesubsections}
+
+\newcommand{\UseSubsections}{%
+    \toggletrue{usesubsections}%
+}
+
+\DeclareOption{usesubsections}{\UseSubsections}
+
+% Frame numbers options
+\newtoggle{showframenumbers}
+\toggletrue{showframenumbers}
+
+\newcommand{\ShowFrameNumbers}{%
+    \toggletrue{showframenumbers}%
+}
+\newcommand{\HideFrameNumbers}{%
+    \togglefalse{showframenumbers}%
+}
+
+\DeclareOption{hideframenumbers}{\HideFrameNumbers}
+\DeclareOption{showframenumbers}{\ShowFrameNumbers}
+
+\ProcessOptions\relax
 
 %----------------------------------------------------------------------
 % beamer options
@@ -110,7 +136,7 @@
             \insertbackfindforwardnavigationsymbol%
         \end{beamercolorbox}%
         \begin{beamercolorbox}[wd=0.1\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
-            \usebeamerfont{title in head/foot} \insertframenumber/\inserttotalframenumber
+            \usebeamerfont{title in head/foot} \iftoggle{showframenumbers}{\insertframenumber/\inserttotalframenumber}{}
         \end{beamercolorbox}%
     }
 }
@@ -118,17 +144,41 @@
 %----------------------------------------------------------------------
 % section title page
 
-\AtBeginSection[]{
-    \begin{frame}
-        \centering
-        \begin{beamercolorbox}[sep=16pt,center]{title}
-            \usebeamerfont{title}\insertsectionhead\par%
-        \end{beamercolorbox}
-    \end{frame}
+\iftoggle{usesubsections}{%
+    \AtBeginSection[]{%
+        {\setbeamercolor{background canvas}{bg=secondarypurple}
+            \begin{frame}[noframenumbering]  % section dividers do not count toward slide count
+                \centering
+                \begin{beamercolorbox}[sep=32pt,left]{title}
+                    \usebeamerfont{title}\insertsectionhead\par%
+                \end{beamercolorbox}
+            \end{frame}
+        }
+}}{%
+    \AtBeginSection[]{
+        \begin{frame}[noframenumbering]  % section dividers do not count toward slide count
+            \centering
+            \begin{beamercolorbox}[sep=16pt,center]{title}
+                \usebeamerfont{title}\insertsectionhead\par%
+            \end{beamercolorbox}
+        \end{frame}
+    }
 }
 
-% Superscript removal for hyperref recognition in pdf string
-\newcommand{\supersc}[1]{\texorpdfstring{\textsuperscript{#1}}{}}
+%----------------------------------------------------------------------
+% subsection title page
+
+\iftoggle{usesubsections}{%
+\setbeamertemplate{sections/subsections in toc}[square]
+    \AtBeginSubsection[]{
+        \begin{frame}[noframenumbering]  % section dividers do not count toward slide count
+            \centering
+            \begin{beamercolorbox}[sep=16pt,center]{title}
+                \usebeamerfont{title}\insertsubsectionhead\par%
+            \end{beamercolorbox}
+        \end{frame}
+    }
+}{}
 
 %----------------------------------------------------------------------
 % source citation box
@@ -154,5 +204,8 @@
 \setbeamertemplate{bibliography entry title}{}
 \setbeamertemplate{bibliography entry location}{}
 \setbeamertemplate{bibliography entry note}{}
+
+% Superscript removal for hyperref recognition in pdf string
+\newcommand{\supersc}[1]{\texorpdfstring{\textsuperscript{#1}}{}}
 
 %----------------------------------------------------------------------
